@@ -1,0 +1,31 @@
+################################################################################
+# This requirements file has been automatically generated from `Pipfile` with
+# `pipenv-to-requirements`
+#
+#
+# This has been done to maintain backward compatibility with tools and services
+# that do not support `Pipfile` yet.
+#
+# Do NOT edit it directly, use `pipenv install [-d]` to modify `Pipfile` and
+# `Pipfile.lock` and then regenerate `requirements*.txt`.
+################################################################################
+
+colour
+flask
+flask-bcrypt==0.7.1
+flask-migrate==2.0.2
+flask-restplus==0.13.0
+flask-restx
+flask-script==2.0.5
+flask-sqlalchemy==2.1
+flask-testing==0.6.1
+flask.ext
+gunicorn
+jinja2==2.11.2
+mako==1.0.6
+markupsafe==1.1.1
+psycopg2
+pyjwt
+python-dotenv
+sqlalchemy
+werkzeug==0.16.1

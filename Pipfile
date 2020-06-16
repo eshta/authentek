@@ -1,0 +1,35 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pipenv-to-requirements = "*"
+coverage = "*"
+pytest = "*"
+flask-testing = "==0.8.0"
+
+[packages]
+werkzeug = "==0.16.1"
+Flask = "*"
+Flask-Bcrypt = "==0.7.1"
+Flask-Migrate = "==2.0.2"
+Flask-Script = "==2.0.5"
+Flask-SQLAlchemy = "==2.4.3"
+Flask-Testing = "==0.6.1"
+flask-restplus = "==0.13.0"
+Jinja2 = "==2.11.2"
+Mako = "==1.0.6"
+MarkupSafe = "==1.1.1"
+SQLAlchemy = "*"
+Werkzeug = "==0.16.1"
+psycopg2 = "*"
+pyjwt = "*"
+gunicorn = "*"
+python-dotenv = "*"
+colour = "*"
+"flask.ext" = "*"
+flask-restx = "*"
+
+[requires]
+python_version = "3.7"

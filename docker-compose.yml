@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  auth:
+    build: .
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+#    networks:
+#      - default
+    ports:
+      - 8888:8888
+    entrypoint:
+      - sh
+      - ./.docker/entrypoint.sh
+    volumes:
+      - ./:/usr/src/app/
+      - ./migrations:/usr/src/app/migrations
+    restart: always
+
+  postgres:
+    image: postgres:9.6
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./.docker/data/pg:/var/lib/postgresql/data
+      - ./.docker/pg/:/docker-entrypoint-initdb.d/
