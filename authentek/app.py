@@ -1,3 +1,5 @@
+import os
+
 from flask import Blueprint
 
 from authentek import settings
@@ -29,6 +31,7 @@ def configure_app(flask_app):
     flask_app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
     flask_app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
+    flask_app.config.from_object(os.getenv('APP_SETTINGS', 'authentek.server.config.TestingConfig'))
 
 
 def configure_extensions(flask_app, cli):
@@ -57,8 +60,6 @@ def initialize_app(flask_app, cli=False):
     configure_app(flask_app)
     configure_extensions(flask_app, cli)
 
-
-
     # db.init_app(flask_app)
     # configure_extensions(flask_app, cli)
 
@@ -73,8 +74,9 @@ def main():
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     return app
 
+
 def run():
-    app.run(host='0.0.0.0', debug=settings.FLASK_DEBUG)
+    app.run(host='0.0.0.0', port=8888, debug=settings.FLASK_DEBUG)
 
 
 if __name__ == "__main__":
