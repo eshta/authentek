@@ -30,6 +30,7 @@ python-dotenv = "*"
 colour = "*"
 "flask.ext" = "*"
 flask-restx = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"
