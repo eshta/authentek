@@ -34,7 +34,7 @@ def configure_extensions(flask_app, cli):
     """
     db.init_app(flask_app)
 
-    CORS(flask_app, resources={r"/v1/*": {"origins": "*"}})
+
     blueprint = Blueprint('api', __name__, url_prefix='/v1')
     api.init_app(blueprint)
     api.add_namespace(users_namespace)
@@ -44,7 +44,7 @@ def configure_extensions(flask_app, cli):
     else:
         flask_app.blueprints[blueprint.name] = blueprint
 
-
+    CORS(flask_app, resources={r"/v1/*": {"origins": "*"}})
     db.app = flask_app
     db.create_all()
 
