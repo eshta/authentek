@@ -11,7 +11,6 @@ class BaseConfig:
     DEBUG = False
     BCRYPT_LOG_ROUNDS = 13
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SERVER_NAME = os.getenv('SERVER_NAME', 'auth.local')
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious')
     SQLALCHEMY_DATABASE_URI = postgres_local_base + database_name
 
