@@ -84,7 +84,7 @@ def main():
 
 
 def run():
-    app.run(host='0.0.0.0', port=8888, debug=settings.FLASK_DEBUG)
+    app.run(host=app.config['SERVER_NAME'], port=8888, debug=settings.FLASK_DEBUG)
 
 
 if __name__ == "__main__":
