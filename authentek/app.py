@@ -89,4 +89,4 @@ def run():
 
 if __name__ == "__main__":
     flask_app = main()
-    flask_app.run()
+    flask_app.run(host=app.config['SERVER_NAME'], port=8888, debug=settings.FLASK_DEBUG)
