@@ -12,6 +12,7 @@ class BaseConfig:
     BCRYPT_LOG_ROUNDS = 13
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious')
+    JWT_TTL = int(os.getenv('JWT_TTL', '5'))
     SQLALCHEMY_DATABASE_URI = postgres_local_base + database_name
 
 

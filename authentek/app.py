@@ -19,7 +19,7 @@ def has_no_empty_params(rule):
 
 def configure_app(flask_app):
     flask_app.config.from_object(os.getenv('APP_SETTINGS', 'authentek.server.config.DevelopmentConfig'))
-    flask_app.config['SERVER_NAME'] = '0.0.0.0'
+    # flask_app.config['SERVER_NAME'] = '0.0.0.0'
     flask_app.config['ENV'] = settings.ENV
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = settings.SQLALCHEMY_TRACK_MODIFICATIONS

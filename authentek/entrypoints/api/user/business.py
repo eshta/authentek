@@ -28,6 +28,13 @@ def create_user(data):
                 'auth_token': auth_token
             }
             return response, 201
+        except TypeError:
+            response = {
+                'status': 'fail',
+                'message': 'Some error occured. Please try again later!'
+            }
+            log.exception(e)
+            return response, 500
         except IntegrityError as e:
             response = {
                 'status': 'fail',

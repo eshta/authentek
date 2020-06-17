@@ -1,9 +1,10 @@
 from typing import Tuple
 
+from authentek.database.models import User
+
 
 class StatusUseCase(object):
     def execute(self, auth_token) -> Tuple:
-        from authentek.server.models import User
         if auth_token:
             resp = User.decode_auth_token(auth_token)
             if isinstance(resp, int):

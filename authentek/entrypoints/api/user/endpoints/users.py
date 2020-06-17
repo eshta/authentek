@@ -6,6 +6,7 @@ from flask_restx import Resource
 from authentek.entrypoints.api.restplus import api
 from authentek.entrypoints.api.user.business import create_user, view_user
 from authentek.entrypoints.api.user.serializers import user_request
+from authentek.logger import log
 
 log = logging.getLogger(__name__)
 
@@ -26,15 +27,23 @@ class UsersCollection(Resource):
         """
         data = request.json
         response = create_user(data)
-        return make_response((jsonify(response[0]), response[1]))
+        try:
+            log.exception(response)
+            return make_response((jsonify(response[0]), response[1]))
+        except Exception as e:
+            log.exception(e)
+            return make_response(jsonify({
+                'status': 'fail',
+                'message': 'Service is unavailable.'
+            }), 500)
 
     @api.doc(responses={
         200: 'Success',
-        401: 'Unauthorized'
+        401: 'Unauthorized',
+        500: 'Internal Server Error'
     })
     @api.header('Authorization', 'Authorization header (Bearer token)')
     def get(self):
-        from authentek.server.models import User
         # get auth token
         auth_header = request.headers.get('authorization')
         if auth_header:
@@ -44,7 +53,10 @@ class UsersCollection(Resource):
 
         if auth_token:
             response = view_user(auth_token)
-            return make_response((jsonify(response[0]), response[1]))
+            try:
+                return make_response((jsonify(response[0]), response[1]))
+            except Exception as e:
+                log.exception(e)
         else:
             response = {
                 'status': 'fail',

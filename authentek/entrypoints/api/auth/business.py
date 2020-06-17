@@ -6,7 +6,6 @@ from authentek.logger import log
 
 def login():
     from authentek.server import bcrypt
-    from authentek.server.models import User
     # get the post data
     post_data = request.get_json()
     try:

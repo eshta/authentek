@@ -50,7 +50,6 @@ class Logout(Resource):
 @ns.route('/info')
 class Info(Resource):
     def get(self):
-        from authentek.server.models import User
         # get auth token
         auth_header = request.headers.get('authorization')
         if auth_header:
