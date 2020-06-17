@@ -18,11 +18,8 @@ def has_no_empty_params(rule):
 
 
 def configure_app(flask_app):
+    flask_app.config.from_object(os.getenv('APP_SETTINGS', 'authentek.server.config.DevelopmentConfig'))
     flask_app.config['SERVER_NAME'] = settings.FLASK_SERVER_NAME
-    if settings.ENV == 'test':
-        flask_app.config['DEBUG'] = False
-    else:
-        flask_app.config['DEBUG'] = settings.FLASK_DEBUG
 
     flask_app.config['ENV'] = settings.ENV
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
@@ -31,7 +28,7 @@ def configure_app(flask_app):
     flask_app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
     flask_app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
-    flask_app.config.from_object(os.getenv('APP_SETTINGS', 'authentek.server.config.TestingConfig'))
+
 
 
 def configure_extensions(flask_app, cli):
@@ -55,7 +52,6 @@ def configure_extensions(flask_app, cli):
     if cli is True:
         migrate.init_app(flask_app, db)
 
-
 def initialize_app(flask_app, cli=False):
     configure_app(flask_app)
     configure_extensions(flask_app, cli)
@@ -68,10 +64,20 @@ def initialize_app(flask_app, cli=False):
 
 def main():
     from authentek.database.models import User, BlacklistToken  # noqa
-    app.config.from_object(settings)
     initialize_app(app)
     log.info(str(app.config))
-    log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
+    log.info('>>>>> Starting development server at http://{}/ <<<<<'.format(app.config['SERVER_NAME']))
+
+    @app.route("/links")
+    def links():
+        from flask import url_for
+        links = []
+        for rule in app.url_map.iter_rules():
+            if len(rule.defaults) >= len(rule.arguments):
+                url = url_for(rule.endpoint, **(rule.defaults or {}))
+                links.append((url, rule.endpoint))
+
+        return links
     return app
 
 
@@ -80,5 +86,5 @@ def run():
 
 
 if __name__ == "__main__":
-    main()
-    run()
+    flask_app = main()
+    flask_app.run()
