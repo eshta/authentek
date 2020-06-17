@@ -30,7 +30,6 @@ def configure_app(flask_app):
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
 
 
-
 def configure_extensions(flask_app, cli):
     """configure flask extensions
     """
@@ -52,6 +51,7 @@ def configure_extensions(flask_app, cli):
     if cli is True:
         migrate.init_app(flask_app, db)
 
+
 def initialize_app(flask_app, cli=False):
     configure_app(flask_app)
     configure_extensions(flask_app, cli)
@@ -70,14 +70,16 @@ def main():
 
     @app.route("/links")
     def links():
-        from flask import url_for
+        from flask import url_for, jsonify
+
         links = []
         for rule in app.url_map.iter_rules():
-            if len(rule.defaults) >= len(rule.arguments):
+            if "GET" in rule.methods and has_no_empty_params(rule):
                 url = url_for(rule.endpoint, **(rule.defaults or {}))
                 links.append((url, rule.endpoint))
+        # links is now a list of url, endpoint tuples
+        return jsonify(links)
 
-        return links
     return app
 
 
