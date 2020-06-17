@@ -6,7 +6,7 @@ from authentek import settings
 from authentek.entrypoints.api.user.endpoints import ns as users_namespace
 from authentek.entrypoints.api.auth.endpoints import ns as auth_namespace
 from authentek.entrypoints.api import api
-from authentek.extensions import db, migrate, bcrypt
+from authentek.extensions import db, migrate, bcrypt, cors
 from authentek.internal import app
 from authentek.logger import log
 
@@ -44,7 +44,7 @@ def configure_extensions(flask_app, cli):
     else:
         flask_app.blueprints[blueprint.name] = blueprint
 
-    CORS(flask_app, resources={r"/v1/*": {"origins": "*"}})
+    cors.init_app(flask_app)
     db.app = flask_app
     db.create_all()
 
