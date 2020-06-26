@@ -34,7 +34,6 @@ def configure_extensions(flask_app, cli):
     """
     db.init_app(flask_app)
 
-
     blueprint = Blueprint('api', __name__, url_prefix='/v1')
     api.init_app(blueprint)
     api.add_namespace(users_namespace)
@@ -90,4 +89,4 @@ def run():
 
 if __name__ == "__main__":
     flask_app = main()
-    flask_app.run(host=app.config['SERVER_NAME'], port=8888, debug=settings.FLASK_DEBUG)
+    flask_app.run(host='0.0.0.0', port=8888, debug=settings.FLASK_DEBUG)
