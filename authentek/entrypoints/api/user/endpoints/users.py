@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 ns = api.namespace('users', description='Users')
 
 
-@ns.route('/')
+@ns.route('/', strict_slashes=False)
 class UsersCollection(Resource):
     @api.doc(responses={
         201: 'Created',

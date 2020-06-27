@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 ns = api.namespace('auth', description='Authentication')
 
 
-@ns.route('/login')
+@ns.route('/login', strict_slashes=False)
 class Login(Resource):
     @api.expect(login_request)
     def post(self) -> Any:
@@ -29,7 +29,7 @@ class Login(Resource):
         return make_response((jsonify(response[0]), response[1]))
 
 
-@ns.route('/logout')
+@ns.route('/logout', strict_slashes=False)
 class Logout(Resource):
     @api.expect()
     def post(self) -> Any:
@@ -47,7 +47,7 @@ class Logout(Resource):
 
 
 @api.header('Authorization', 'Authorization header (Bearer token)')
-@ns.route('/info')
+@ns.route('/info', strict_slashes=False)
 class Info(Resource):
     def get(self):
         # get auth token
