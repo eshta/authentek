@@ -30,6 +30,7 @@ colour = "*"
 "flask.ext" = "*"
 flask-restx = "*"
 flask-cors = "*"
+uuid = "*"
 
 [requires]
 python_version = "3.7"

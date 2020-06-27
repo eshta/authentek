@@ -5,7 +5,7 @@ from flask_restx import Api
 from authentek import settings
 from sqlalchemy.orm.exc import NoResultFound
 
-log = logging.getLogger(__name__)
+from authentek.logger import log
 
 api = Api(version='1.0', title='Auth API',
           doc='/docs',

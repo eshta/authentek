@@ -1,14 +1,28 @@
-version: '3.6'
+# WARNING: this file is not suitable for production, please use with caution
+version: '3'
 
 services:
+#  web:
+#    image: authentek
+#    build: .
+#    command: gunicorn -b 0.0.0.0:5000 authentek.wsgi:app
+#    env_file:
+#      - ./.flaskenv
+#    environment:
+#      - DATABASE_URI=sqlite:////db/authentek.db
+#    volumes:
+#      - ./authentek:/code/authentek
+#      - ./db/:/db/
+#    ports:
+#      - "5000:5000"
   auth:
     build: .
     depends_on:
       - postgres
     env_file:
       - .env
-#    networks:
-#      - default
+    #    networks:
+    #      - default
     ports:
       - 8888:8888
     entrypoint:

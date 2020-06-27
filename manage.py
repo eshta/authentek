@@ -6,21 +6,17 @@ import unittest
 import coverage
 
 from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
-from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import MigrateCommand
 
 
-from authentek import settings
-from authentek.app import initialize_app, log, main
+from authentek.app import initialize_app, log
 from authentek.internal import app
-from authentek import settings
-from authentek.extensions import db
+from authentek.extensions import db, migrate
 from authentek.database.models import User, BlacklistToken  # noqa
 
-app.config.from_object(settings)
-manager = Manager(app)
 initialize_app(app, True)
-
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 COV = coverage.coverage(
     branch=True,
@@ -67,13 +63,20 @@ def create_db():
 
 
 @manager.command
-def migrate():
-    print(app.extensions)
-
+def migrate_db():
     # migrations
-    manager.add_command('db', MigrateCommand)
+    from authentek.database.models import User, BlacklistToken
+
+    migrate.init_app(app)
+
+    # log.info(app.extensions)
+
 
 @manager.command
 def drop_db():
     """Drops the db tables."""
     db.drop_all()
+
+
+if __name__ == '__main__':
+    migrate_db()

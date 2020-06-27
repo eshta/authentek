@@ -16,6 +16,7 @@ class StatusUseCase(object):
                         'email': user.email,
                         'username': user.username,
                         'admin': user.admin,
+                        'uuid': user.uuid,
                         'registered_on': user.registered_on
                     }
                 }

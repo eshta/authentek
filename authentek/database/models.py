@@ -4,9 +4,10 @@
 
 import datetime
 import jwt
-
+import uuid
 from authentek.extensions import db, bcrypt
 from authentek.internal import app
+from authentek.logger import log
 
 
 class User(db.Model):
@@ -14,6 +15,7 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    uuid = db.Column(db.String, unique=True)
     email = db.Column(db.String(255), unique=True, nullable=False)
     username = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
@@ -21,12 +23,13 @@ class User(db.Model):
     admin = db.Column(db.Boolean, nullable=False, default=False)
 
     def __init__(self, username, email, password, admin=False):
-        from authentek.app import app
+        from authentek.internal import app
         self.email = email
         self.username = username
         self.password = bcrypt.generate_password_hash(
             password, app.config.get('BCRYPT_LOG_ROUNDS')
         ).decode()
+        self.uuid = str(uuid.uuid4())
         self.registered_on = datetime.datetime.now()
         self.admin = admin
 
@@ -47,7 +50,7 @@ class User(db.Model):
                 algorithm='HS256'
             ).decode('utf-8')
         except Exception as e:
-            return e
+            log.exception(e)
 
     @staticmethod
     def decode_auth_token(auth_token):

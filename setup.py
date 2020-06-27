@@ -1,27 +1,27 @@
 from setuptools import setup, find_packages
 
+__version__ = "0.1"
+
 setup(
-    name='authentek',
-    version='1.0.0',
-    description='Boilerplate code for a RESTful API based on Flask-RESTPlus',
-    url='https://github.com/eshta/authentek',
-    author='Omar Shaban',
-
-    classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Libraries :: Application Frameworks',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+    name="authentek",
+    version=__version__,
+    packages=find_packages(exclude=["tests"]),
+    install_requires=[
+        "flask",
+        "flask-sqlalchemy",
+        "flask-restful",
+        "flask-migrate",
+        "flask-jwt-extended",
+        "flask-marshmallow",
+        "marshmallow-sqlalchemy",
+        "python-dotenv",
+        "passlib",
+        "apispec[yaml]",
+        "apispec-webframeworks",
     ],
-
-    keywords='rest restful api flask swagger openapi flask-restplus',
-
-    packages=find_packages(),
+    entry_points={
+        "console_scripts": [
+            "authentek = authentek.manage:cli"
+        ]
+    },
 )
