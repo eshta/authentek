@@ -15,7 +15,7 @@ def create_app(testing=False, cli=False) -> Flask:
     if testing is True:
         app.config["TESTING"] = True
 
-    configure_extensions(app, cli)
+    app = configure_extensions(app, cli)
     register_blueprints(app)
 
     return app
@@ -32,6 +32,7 @@ def configure_extensions(flask_app, cli):
     bcrypt.init_app(flask_app)
     if cli is True:
         migrate.init_app(flask_app, db)
+    return flask_app
 
 
 def register_blueprints(flask_app):
