@@ -22,5 +22,5 @@ until psql -h $PG_HOST -U $PG_USER -d $PG_DATABASE -c "select 1" > /dev/null 2>&
   sleep 1
 done
 
-#gunicorn -c gunicorn.config.py wsgi:app
-make run
+gunicorn -c gunicorn.config.py wsgi:app
+#make run
