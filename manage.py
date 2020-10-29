@@ -9,6 +9,7 @@ from flask_script import Manager
 
 from authentek.app import create_app as initialize_app
 from authentek.logger import log
+
 from authentek.extensions import db, migrate
 from authentek.database.models import User, BlacklistToken  # noqa
 from flask_migrate import MigrateCommand
