@@ -47,7 +47,10 @@ def register_blueprints(flask_app):
     else:
         flask_app.blueprints[blueprint.name] = blueprint
 
+def main(port: int = 8888):
+    app = create_app(False, True)
+    app.run(host='0.0.0.0', port=port)
 
 if __name__ == '__main__':
-    app = create_app(False, True)
-    app.run(host='0.0.0.0', port=8888)
+    main()
+

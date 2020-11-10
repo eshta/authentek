@@ -4,7 +4,7 @@ import time
 from flask_testing import TestCase
 
 from authentek.app import main
-from authentek.database import db
+from authentek.extensions import db
 
 
 class BaseTestCase(TestCase):
@@ -16,7 +16,7 @@ class BaseTestCase(TestCase):
     def create_app(self):
         from authentek.internal import app
         app.config.from_object('authentek.server.config.TestingConfig')
-        app = main()
+        app = main(port=8080)
         return app
 
     def setUp(self):

@@ -14,3 +14,4 @@ coverage
 flask-testing==0.8.0
 pipenv-to-requirements
 pytest
+pytest-factoryboy

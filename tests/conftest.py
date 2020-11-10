@@ -1,7 +1,7 @@
 import json
 import pytest
 
-from authentek.models import User
+from authentek.database.models import User
 from authentek.app import create_app
 from authentek.extensions import db as _db
 from pytest_factoryboy import register

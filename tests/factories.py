@@ -1,5 +1,5 @@
 import factory
-from authentek.models import User
+from authentek.database.models import User
 
 
 class UserFactory(factory.Factory):

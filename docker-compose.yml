@@ -25,10 +25,10 @@ services:
     #      - default
     ports:
       - 8888:8888
-    command: tail -F /dev/null
-#    entrypoint:
-#      - sh
-#      - ./.docker/entrypoint.sh
+#    command: tail -F /dev/null
+    entrypoint:
+      - sh
+      - ./.docker/entrypoint.sh
     volumes:
       - ./:/usr/src/app/
       - ./migrations:/usr/src/app/migrations

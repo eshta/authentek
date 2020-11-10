@@ -5,9 +5,9 @@ import unittest
 
 from flask import current_app
 from flask_testing import TestCase
+from authentek.app import create_app
 
-from authentek.app import app
-
+app = create_app(testing=True)
 
 class TestDevelopmentConfig(TestCase):
     def create_app(self):

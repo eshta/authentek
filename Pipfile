@@ -8,6 +8,7 @@ pipenv-to-requirements = "*"
 coverage = "*"
 pytest = "*"
 flask-testing = "==0.8.0"
+pytest-factoryboy = "*"
 
 [packages]
 werkzeug = "==0.16.1"

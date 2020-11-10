@@ -1,5 +1,5 @@
 from flask import url_for
-from authentek.models import User
+from authentek.database.models import User
 
 
 def test_get_user(client, db, user, admin_headers):
