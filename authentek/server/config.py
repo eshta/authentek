@@ -15,6 +15,12 @@ class BaseConfig:
     JWT_TTL = 2592000
     SQLALCHEMY_DATABASE_URI = postgres_local_base + database_name
 
+    MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+    MAIL_PORT = 465
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME', '')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD', '')
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
 
 class DevelopmentConfig(BaseConfig):
     """Development configuration."""
