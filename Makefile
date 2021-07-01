@@ -24,9 +24,6 @@ db-migrate:
 db-upgrade:
 	docker-compose exec web authentek db upgrade
 
-test:
-	docker-compose run -v $(PWD)/tests:/code/tests:ro web tox -e test
-
 tox:
 	docker-compose run -v $(PWD)/tests:/code/tests:ro web tox -e py37
 
