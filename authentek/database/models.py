@@ -48,7 +48,7 @@ class User(db.Model):
                 payload,
                 app.config.get('SECRET_KEY'),
                 algorithm='HS256'
-            ).decode('utf-8')
+            )
         except Exception as e:
             log.exception(e)
 
