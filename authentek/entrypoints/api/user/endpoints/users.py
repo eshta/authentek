@@ -20,12 +20,13 @@ class UsersCollection(Resource):
         400: 'Bad Request',
         500: 'Internal Server Error',
     })
-    @api.expect(user_request)
+    @api.expect([user_request])
     def post(self):
         """
             Creates a user
         """
         data = request.json
+        # todo validate content type
         response = create_user(data)
         try:
             log.exception(response)
