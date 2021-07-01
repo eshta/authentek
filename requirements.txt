@@ -21,7 +21,7 @@ flask-sqlalchemy==2.4.3
 flask-testing==0.6.1
 flask.ext
 gunicorn
-jinja2==2.11.2
+jinja2==2.11.3
 mako==1.0.6
 markupsafe==1.1.1
 psycopg2
